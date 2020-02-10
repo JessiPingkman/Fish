@@ -1,14 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public float speed;
+    [SerializeField]
+    private float _bulletSpeed = 1;
 
-    public virtual void BulletFlight()
+    private Vector2 endPoint;
+    private bool isMove = true;
+    private const string EVENT_UPDATE_COUNT_ENEMY_LABEL = "UpdateCountEnemyLable";
+
+
+    private void Awake()
     {
-        rb.AddRelativeForce(Camera.main.ScreenToWorldPoint(Input.mousePosition) * speed, ForceMode2D.Impulse);
+        endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        isMove = true;
+    }
+
+    private void Update()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, endPoint, _bulletSpeed);
+        if((Vector2)transform.position == endPoint && isMove)
+        {
+            isMove = !isMove;
+            Kill();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var entity = collision.GetComponent<Enemy>();
+        if (entity != null)
+        {
+            entity.Kill();
+            Kill();
+            EventManager.TriggerEvent(EVENT_UPDATE_COUNT_ENEMY_LABEL);
+        }
+    }
+
+    public void Kill()
+    {
+        Destroy(gameObject);
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9171898539491502859}
   - component: {fileID: 9171898539491502856}
   - component: {fileID: -701196517605028292}
+  - component: {fileID: 4209434094530317535}
   m_Layer: 5
   m_Name: Enemy
   m_TagString: Untagged
@@ -37,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 122, y: -720}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9171898539491502861
@@ -88,8 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bbb290af6d1e3446916debbd185b77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  bulletPref: {fileID: 0}
 --- !u!61 &9171898539491502856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,3 +136,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4209434094530317535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9171898539491502854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e307daecc051b3a48885c5ee7c0e44ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 1

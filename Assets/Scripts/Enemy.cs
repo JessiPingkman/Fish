@@ -1,39 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Enemy : Character
+public class Enemy : MonoBehaviour
 {
-    private void Update()
-    {
-        Move();
-    }
-
-    private void Awake()
-    {
-        if(transform.localPosition.x > Controller.GetRandomPoint().x || transform.localPosition.x < Controller.GetRandomPoint().x)
-        {
-            transform.localPosition = Controller.GetRandomPoint();
-        }
-    }
-
-    public override void Move()
-    {
-        if (Controller.self.player == null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, Controller.self.player.transform.position, speed);
-        }
-    }
+    private const string SHOW_GAMEOVER_LABEL = "ShowGameOverLabel";
+    private const string KILL_PLAYER = "KillPlayer";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<Player>() != null)
+        if (collision.GetComponent<Player>() != null)
         {
-            Destroy(Controller.self.player);
+            EventManager.TriggerEvent(KILL_PLAYER);
+            EventManager.TriggerEvent(SHOW_GAMEOVER_LABEL);
         }
+    }
+
+    public void Kill()
+    {
+        Destroy(gameObject);
     }
 }
